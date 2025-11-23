@@ -1,33 +1,9 @@
 use std::env::args;
-use std::io;
 use std::process::exit;
+use shotg::util::{ match_command, new_project, Commands };
+use std::io::Result as IOResult;
 
-enum Commands {
-    New,
-    Init,
-    Run,
-}
-
-fn match_command(cmd: String) -> Option<Commands> {
-    if cmd == "new".to_string() {
-        Some(Commands::New)
-    }
-    else if cmd == "init".to_string() {
-        Some(Commands::Init)
-    }
-    else if cmd == "run".to_string() {
-        Some(Commands::Run)
-    }
-    else {
-        None
-    }
-}
-
-fn new_project() -> Result<(), String> {
-    Ok(())
-}
-
-fn main() -> io::Result<()> {
+fn main() -> IOResult<()> {
     let argv: Vec<String> = args().collect();
     let argc: usize = argv.len();
 
@@ -40,7 +16,16 @@ fn main() -> io::Result<()> {
 
     match command_opt {
         Some(cmd) => match cmd {
-            Commands::New => println!("this is new"),
+
+            Commands::New => {
+                if argc < 3 {
+                    println!("Project Name Required: {} new <NAME>", argv[0]);
+                    exit(1);
+                }
+
+                new_project(argv[2].clone())?;
+            },
+
             Commands::Run => println!("this is run"),
             Commands::Init => println!("this is init"),
         },
