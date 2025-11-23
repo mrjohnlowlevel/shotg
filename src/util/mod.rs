@@ -58,3 +58,11 @@ pub fn run_project() -> io::Result<()> {
 
     Ok(())
 }
+
+pub fn init_project() -> io::Result<()> {
+    create_dir("bin")?;
+    let mut mainc: File = File::create_new("main.c")?;
+    mainc.write_all(MAIN_C_FILE_CONTENT.as_bytes())?;
+
+    Ok(())
+}

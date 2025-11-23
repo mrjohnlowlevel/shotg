@@ -1,4 +1,4 @@
-use shotg::util::{Commands, match_command, new_project, run_project};
+use shotg::util::{Commands, match_command, new_project, run_project, init_project};
 use std::env::args;
 use std::io::Result as IOResult;
 use std::process::exit;
@@ -23,13 +23,17 @@ fn main() -> IOResult<()> {
                 }
 
                 new_project(argv[2].clone())?;
+                println!("Created project \"{}\"", argv[2].clone());
             }
 
             Commands::Run => {
                 run_project()?;
             },
 
-            Commands::Init => println!("this is init"),
+            Commands::Init => {
+                init_project()?;
+                println!("Initialized project in current directory");
+            },
         },
 
         None => {
