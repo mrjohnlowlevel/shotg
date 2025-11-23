@@ -1,7 +1,7 @@
+use shotg::util::{Commands, match_command, new_project, run_project};
 use std::env::args;
-use std::process::exit;
-use shotg::util::{ match_command, new_project, Commands };
 use std::io::Result as IOResult;
+use std::process::exit;
 
 fn main() -> IOResult<()> {
     let argv: Vec<String> = args().collect();
@@ -16,7 +16,6 @@ fn main() -> IOResult<()> {
 
     match command_opt {
         Some(cmd) => match cmd {
-
             Commands::New => {
                 if argc < 3 {
                     println!("Project Name Required: {} new <NAME>", argv[0]);
@@ -24,12 +23,19 @@ fn main() -> IOResult<()> {
                 }
 
                 new_project(argv[2].clone())?;
+            }
+
+            Commands::Run => {
+                run_project()?;
             },
 
-            Commands::Run => println!("this is run"),
             Commands::Init => println!("this is init"),
         },
-        None => println!("none here"),
+
+        None => {
+            println!("Command `{}` doesn't exist", argv[1].clone());
+            exit(1);
+        }
     }
 
     Ok(())
