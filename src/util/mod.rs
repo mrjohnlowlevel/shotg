@@ -12,19 +12,16 @@ pub enum Commands {
     Run,
 }
 
-pub fn match_command(cmd: String) -> Option<Commands> {
-    if cmd == "new".to_string() {
-        Some(Commands::New)
-    } else if cmd == "init".to_string() {
-        Some(Commands::Init)
-    } else if cmd == "run".to_string() {
-        Some(Commands::Run)
-    } else {
-        None
+pub fn match_command(cmd: &str) -> Option<Commands> {
+    match cmd {
+        "new" => Some(Commands::New),
+        "run" => Some(Commands::Run),
+        "init" => Some(Commands::Init),
+        _ => None,
     }
 }
 
-pub fn new_project(project_name: String) -> io::Result<()> {
+pub fn new_project(project_name: &str) -> io::Result<()> {
     let bin_dir: String = format!("{project_name}/bin");
     let main_file: String = format!("{project_name}/main.c");
     // let makefile: String = format!("{project_name}/makefile");

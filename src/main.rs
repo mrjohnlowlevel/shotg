@@ -12,7 +12,7 @@ fn main() -> io::Result<()> {
         exit(1);
     }
 
-    let command_opt: Option<Commands> = match_command(argv[1].clone());
+    let command_opt: Option<Commands> = match_command(argv[1].as_str());
 
     match command_opt {
         Some(cmd) => match cmd {
@@ -22,7 +22,7 @@ fn main() -> io::Result<()> {
                     exit(1);
                 }
 
-                new_project(argv[2].clone())?;
+                new_project(argv[2].as_str())?;
                 println!("Created project \"{}\"", argv[2].clone());
             }
 
@@ -37,7 +37,7 @@ fn main() -> io::Result<()> {
         },
 
         None => {
-            println!("Command `{}` doesn't exist", argv[1].clone());
+            println!("Command `{}` doesn't exist", argv[1].as_str());
             exit(1);
         }
     }
