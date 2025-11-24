@@ -1,9 +1,9 @@
 use shotg::util::{Commands, init_project, match_command, new_project, run_project};
 use std::env::args;
-use std::io::Result as IOResult;
+use std::io;
 use std::process::exit;
 
-fn main() -> IOResult<()> {
+fn main() -> io::Result<()> {
     let argv: Vec<String> = args().collect();
     let argc: usize = argv.len();
 
