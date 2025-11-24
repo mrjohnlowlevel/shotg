@@ -22,7 +22,7 @@ fn main() -> IOResult<()> {
                     exit(1);
                 }
 
-                new_project(argv[2].clone())?;
+                new_project(argv[2].as_str())?;
                 println!("Created project \"{}\"", argv[2].clone());
             }
 
@@ -37,7 +37,7 @@ fn main() -> IOResult<()> {
         },
 
         None => {
-            println!("Command `{}` doesn't exist", argv[1].clone());
+            println!("Command `{}` doesn't exist", argv[1].as_str());
             exit(1);
         }
     }

@@ -21,7 +21,7 @@ pub fn match_command(cmd: &str) -> Option<Commands> {
     }
 }
 
-pub fn new_project(project_name: String) -> io::Result<()> {
+pub fn new_project(project_name: &str) -> io::Result<()> {
     let bin_dir: String = format!("{project_name}/bin");
     let main_file: String = format!("{project_name}/main.c");
     // let makefile: String = format!("{project_name}/makefile");
