@@ -12,7 +12,7 @@ fn main() -> IOResult<()> {
         exit(1);
     }
 
-    let command_opt: Option<Commands> = match_command(argv[1].clone());
+    let command_opt: Option<Commands> = match_command(argv[1].as_str());
 
     match command_opt {
         Some(cmd) => match cmd {
